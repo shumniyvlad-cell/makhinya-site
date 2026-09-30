@@ -12,31 +12,36 @@
 <meta property="og:image" content="img/hero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Onest:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Noto+Serif+Display:ital,wght@0,200;0,300;1,200;1,300&family=Inter+Tight:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap">
 <style>
 /* Layout: кинематографичный журнал — полноэкранные кадры, горизонтальная лента глав, тонкие линии, одна антиква крупно */
 :root{
-  --bg:#111110; --bg-2:#181816; --ink:#ECE6DB; --muted:#8F897F; --line:rgba(236,230,219,.14);
-  --gold:#C6AE84; --gold-ink:#111110;
-  --serif:"Cormorant Garamond","Cormorant",Georgia,"Times New Roman",serif;
-  --sans:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --bg:#0B0B0A; --bg-2:#141413; --ink:#EDE8DF; --muted:#8A857C; --line:rgba(237,232,223,.14);
+  --gold:#EDE8DF; --gold-ink:#0B0B0A;
+  --serif:"Prata",Georgia,"Times New Roman",serif;
+  --serif-it:"Noto Serif Display",Georgia,"Times New Roman",serif;
+  --sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   --gut:clamp(16px,4.5vw,72px);
   --ease:cubic-bezier(.19,1,.22,1);
   color-scheme:dark;
 }
+html:not(.js) [data-th="light"]{--bg:#ECE8E0;--bg-2:#E3DED5;--ink:#141312;--muted:#77726A;--line:rgba(20,19,18,.14);--gold:#141312;--gold-ink:#ECE8E0;background:var(--bg);color:var(--ink)}
 *{box-sizing:border-box}
 html{overflow-x:clip}
 html.lenis{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
-body{margin:0;background:var(--bg);color:var(--ink);font:300 1.0625rem/1.7 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font:300 1.0625rem/1.65 var(--sans);transition:background .1s linear;-webkit-font-smoothing:antialiased;overflow-x:clip}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 p{margin:0}
-h1,h2,h3{margin:0;font-family:var(--serif);font-weight:300;letter-spacing:-.01em;text-wrap:balance}
+h1,h2,h3{margin:0;font-family:var(--serif);font-weight:400;letter-spacing:-.02em;text-wrap:balance}
+h1 em,h2 em,h3 em,.it{font-family:var(--serif-it);font-style:italic;font-weight:300;letter-spacing:-.01em}
 :focus-visible{outline:1px solid var(--gold);outline-offset:4px}
 ::selection{background:var(--gold);color:var(--gold-ink)}
 .pad{padding-inline:var(--gut)}
-.label{font:400 .6875rem/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.label{font:400 .625rem/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.idx{display:block;font:400 .625rem/1 var(--mono);letter-spacing:.22em;color:var(--muted);margin-bottom:1.2rem}
 .gold{color:var(--gold)}
 .bw{filter:grayscale(1) contrast(1.05) brightness(.92)}
 
@@ -47,22 +52,22 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 /* preloader (только со скриптом) */
 .loader{position:fixed;inset:0;z-index:100;background:var(--bg);display:none;place-items:center}
 .js .loader{display:grid}
-.loader .name{font:300 clamp(1.4rem,3vw,2.2rem)/1 var(--serif);letter-spacing:.3em;text-transform:uppercase;overflow:hidden;padding-inline:var(--gut);text-align:center}
+.loader .name{font:400 clamp(1.2rem,2.6vw,1.9rem)/1 var(--serif);letter-spacing:.34em;text-transform:uppercase;overflow:hidden;padding-inline:var(--gut);text-align:center}
 .loader .name span{display:inline-block}
-.loader .count{position:absolute;right:var(--gut);bottom:var(--gut);font:300 clamp(3rem,8vw,6rem)/1 var(--serif);font-variant-numeric:tabular-nums;color:var(--muted)}
+.loader .count{position:absolute;right:var(--gut);bottom:var(--gut);font:200 clamp(4rem,10vw,8rem)/1 var(--serif-it);font-style:italic;font-variant-numeric:tabular-nums;color:var(--muted)}
 
 /* cursor */
 .cursor{position:fixed;left:0;top:0;z-index:95;pointer-events:none;width:8px;height:8px;border-radius:50%;background:var(--ink);mix-blend-mode:difference;display:none}
 .cursor-ring{position:fixed;left:0;top:0;z-index:95;pointer-events:none;width:44px;height:44px;border:1px solid rgba(236,230,219,.5);border-radius:50%;display:none;place-items:center;transition:width .5s var(--ease),height .5s var(--ease),background .5s var(--ease),border-color .5s}
-.cursor-ring b{font:400 .6rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-ink);opacity:0;transition:opacity .3s}
+.cursor-ring b{font:400 .55rem/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-ink);opacity:0;transition:opacity .3s}
 .cursor-ring.big{width:96px;height:96px;background:var(--gold);border-color:var(--gold)}
 .cursor-ring.big b{opacity:1}
 @media (pointer:fine){.js .cursor{display:block}.js .cursor-ring{display:grid}}
 
 /* header */
 .top{position:fixed;left:0;right:0;top:0;z-index:50;padding:calc(1.4rem + env(safe-area-inset-top,0px)) var(--gut) 1.4rem;display:flex;justify-content:space-between;align-items:center;mix-blend-mode:difference;color:#ECE6DB}
-.top .logo{font:400 .8125rem/1 var(--sans);letter-spacing:.28em;text-transform:uppercase}
-.top nav{display:flex;gap:2.2rem;font:400 .75rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase}
+.top .logo{font:400 .75rem/1 var(--mono);letter-spacing:.3em;text-transform:uppercase}
+.top nav{display:flex;gap:2.4rem;font:400 .625rem/1 var(--mono);letter-spacing:.22em;text-transform:uppercase}
 .top nav a{position:relative;padding-block:.3rem}
 .top nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .6s var(--ease)}
 .top nav a:hover::after{transform:scaleX(1);transform-origin:left}
@@ -75,12 +80,13 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 .hero .bgimg img{width:100%;height:100%;object-fit:cover;object-position:62% 28%}
 .hero .bgimg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(17,17,16,.92) 0%,rgba(17,17,16,.55) 45%,rgba(17,17,16,.1) 75%),linear-gradient(0deg,rgba(17,17,16,1) 0%,transparent 40%)}
 .hero-in{position:relative;z-index:2;padding:0 var(--gut) clamp(2rem,6vh,4.5rem);display:grid;gap:1.8rem}
-.hero h1{font-size:clamp(4rem,13vw,12.5rem);line-height:.84;letter-spacing:-.035em}
+.hero h1{font-size:clamp(4rem,13.5vw,14rem);line-height:.86;letter-spacing:-.03em}
 .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
 .hero h1 .ln > span{display:inline-block}
-.hero h1 em{font-weight:300;color:var(--gold);padding-left:.12em}
+.hero h1 .c{display:inline-block;will-change:transform}
+.hero h1 em{padding-left:.1em;font-size:.96em}
 .hero .meta{display:flex;flex-wrap:wrap;gap:1rem 3rem;align-items:end;justify-content:space-between;border-top:1px solid var(--line);padding-top:1.4rem}
-.hero .meta p{max-width:28rem;color:rgba(236,230,219,.78);font-size:1rem}
+.hero .meta p{max-width:26rem;color:rgba(237,232,223,.72);font-size:.95rem;line-height:1.6}
 .scroll-cue{display:flex;align-items:center;gap:1rem}
 .scroll-cue i{width:1px;height:48px;background:linear-gradient(var(--ink),transparent);display:block;animation:cue 2.4s var(--ease) infinite;transform-origin:top}
 @keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
@@ -88,7 +94,8 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 /* statement */
 .statement{padding-block:clamp(6rem,16vh,12rem)}
 .statement .label{display:block;margin-bottom:3rem}
-.statement p{font:300 clamp(1.8rem,4.1vw,3.6rem)/1.18 var(--serif);max-width:62rem;letter-spacing:-.005em}
+.statement .idx{margin-bottom:.6rem}
+.statement p{font:400 clamp(1.7rem,3.8vw,3.4rem)/1.2 var(--serif);max-width:64rem;letter-spacing:-.015em}
 .js .statement p .w{opacity:.16}
 .statement .sign{margin-top:3rem;display:flex;align-items:center;gap:1.2rem;color:var(--muted);font-size:.9rem}
 .statement .sign img{width:56px;height:56px;border-radius:50%;object-fit:cover}
@@ -97,8 +104,8 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 .figures{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .fig{padding:2.6rem 1.6rem 2.4rem 0;display:grid;gap:.9rem;align-content:start}
 .fig + .fig{padding-left:1.6rem;border-left:1px solid var(--line)}
-.fig b{font:300 clamp(3rem,6.2vw,5.6rem)/.9 var(--serif);font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.02em}
-.fig b small{font-size:.38em;letter-spacing:0;margin-left:.2em;color:var(--gold)}
+.fig b{font:400 clamp(3rem,6.2vw,5.6rem)/.9 var(--serif);font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.02em}
+.fig b small{font:300 italic .34em/1 var(--serif-it);letter-spacing:0;margin-left:.15em;color:var(--muted)}
 .fig > span{font-size:.875rem;color:var(--muted);max-width:14rem;line-height:1.5}
 @media (max-width:820px){.figures{grid-template-columns:1fr 1fr}.fig:nth-child(3){padding-left:0;border-left:0}.fig:nth-child(n+3){border-top:1px solid var(--line)}}
 
@@ -112,11 +119,11 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 .ch{width:min(78vw,56rem);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(1.5rem,3vw,3rem);align-items:end}
 .ch .ph{aspect-ratio:4/4.6;max-height:72vh;overflow:hidden;position:relative}
 .ch .ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.12)}
-.ch .num{display:block;font:300 clamp(5rem,10vw,9rem)/.8 var(--serif);color:transparent;-webkit-text-stroke:1px rgba(236,230,219,.35)}
+.ch .num{display:block;font:200 clamp(5rem,10vw,9rem)/.8 var(--serif-it);color:var(--muted)}
 .ch .yrs{display:block;margin:1.4rem 0 .9rem}
 .ch h3{font-size:clamp(1.9rem,3vw,2.8rem);line-height:1;margin-bottom:1.2rem}
-.ch p{color:rgba(236,230,219,.72);font-size:.98rem;max-width:26rem}
-.ch.last .num{-webkit-text-stroke:0;color:var(--gold)}
+.ch p{color:var(--muted);font-size:.95rem;max-width:26rem}
+.ch.last .num{color:var(--ink)}
 .chapters-bar{margin-inline:var(--gut);height:1px;background:var(--line);position:relative}
 .chapters-bar i{position:absolute;inset:0;background:var(--gold);transform-origin:left;transform:scaleX(0)}
 @media (max-width:900px){
@@ -133,7 +140,7 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 .frame .in{overflow:hidden;aspect-ratio:2.6/1}
 .frame img{width:100%;height:100%;object-fit:cover;transform:scale(1.15)}
 .plaque{display:grid;gap:1.2rem;align-content:end}
-.plaque blockquote{margin:0;font:300 italic clamp(1.6rem,2.6vw,2.4rem)/1.2 var(--serif)}
+.plaque blockquote{margin:0;font:300 italic clamp(1.6rem,2.6vw,2.4rem)/1.2 var(--serif-it)}
 .plaque .cap{font-size:.8125rem;color:var(--muted);border-top:1px solid var(--line);padding-top:1rem;line-height:1.6}
 
 /* method */
@@ -147,12 +154,12 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 .dim{padding:3rem 3rem 3rem 0;display:grid;gap:1.4rem;align-content:start}
 .dim + .dim{padding-left:3rem;padding-right:0;border-left:1px solid var(--line)}
 @media (max-width:820px){.dim,.dim + .dim{padding:2.4rem 0;border-left:0}.dim + .dim{border-top:1px solid var(--line)}}
-.dim .big{font:300 clamp(6rem,13vw,11rem)/.8 var(--serif);letter-spacing:-.04em}
-.dim.d2 .big{color:transparent;-webkit-text-stroke:1px rgba(236,230,219,.4)}
-.dim.d3 .big{color:var(--gold)}
-.dim h3{font-size:1.9rem;font-style:italic}
+.dim .big{font:400 clamp(6rem,13vw,11rem)/.8 var(--serif);letter-spacing:-.04em}
+.dim.d2 .big{color:transparent;-webkit-text-stroke:1px var(--muted)}
+.dim.d3 .big{color:var(--ink)}
+.dim h3{font:300 italic 1.9rem/1.1 var(--serif-it)}
 .dim ul{list-style:none;margin:0;padding:0;display:grid}
-.dim li{padding:.85rem 0;border-top:1px solid var(--line);color:rgba(236,230,219,.78);font-size:.98rem}
+.dim li{padding:.85rem 0;border-top:1px solid var(--line);color:var(--ink);font-size:.95rem}
 .aspects{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2vw,2rem);margin-top:6rem}
 @media (max-width:900px){.aspects{grid-template-columns:1fr 1fr}}
 .asp{display:grid;gap:1rem;align-content:start}
@@ -161,12 +168,12 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 .asp .ph{aspect-ratio:3/4;overflow:hidden}
 .asp .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease),filter 1.4s var(--ease)}
 .asp:hover .ph img{transform:scale(1.04);filter:grayscale(0) contrast(1) brightness(1)}
-.asp h3{font-size:1.6rem;line-height:1.1}
+.asp h3{font-size:1.5rem;line-height:1.1}
 .asp p{font-size:.9rem;color:var(--muted);line-height:1.6}
 .principles{margin-top:6rem;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
 @media (max-width:820px){.principles{grid-template-columns:1fr 1fr}}
 .principles div{padding:1.6rem 1.2rem 0 0;display:grid;gap:.6rem}
-.principles b{font:400 italic 1.5rem/1.1 var(--serif);color:var(--gold)}
+.principles b{font:300 italic 1.5rem/1.1 var(--serif-it);color:var(--ink)}
 .principles span{font-size:.875rem;color:var(--muted)}
 
 /* people — full bleed */
@@ -178,9 +185,9 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 @media (max-width:900px){.people-in{grid-template-columns:1fr}}
 .people h2{font-size:clamp(2.4rem,5.4vw,5rem);line-height:1}
 .people .side{display:grid;gap:1.4rem;border-left:1px solid var(--line);padding-left:2rem}
-.people .side p{color:rgba(236,230,219,.78)}
+.people .side p{color:rgba(237,232,223,.75)}
 .people .nums{display:flex;gap:2.4rem}
-.people .nums b{display:block;font:300 3.4rem/1 var(--serif)}
+.people .nums b{display:block;font:400 3.4rem/1 var(--serif)}
 .people .nums span{font-size:.8rem;color:var(--muted)}
 
 /* formats */
@@ -191,13 +198,13 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 .frow{display:grid;grid-template-columns:5rem minmax(0,1.2fr) minmax(0,1fr) 10rem;gap:2rem;align-items:baseline;padding:2.4rem 0;border-top:1px solid var(--line);position:relative;transition:padding .8s var(--ease)}
 .frow:last-child{border-bottom:1px solid var(--line)}
 .frow:hover{padding-left:1.2rem}
-.frow .n{font:300 italic 1.6rem/1 var(--serif);color:var(--muted)}
+.frow .n{font:200 italic 1.7rem/1 var(--serif-it);color:var(--muted)}
 .frow h3{font-size:clamp(1.9rem,3.2vw,3rem);line-height:1}
-.frow h3 small{display:block;font:400 .6875rem/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:.9rem}
-.frow p{color:rgba(236,230,219,.72);font-size:.95rem}
-.frow .go{justify-self:end;font:400 .7rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:.5rem;transition:border-color .4s,color .4s;white-space:nowrap}
+.frow h3 small{display:block;font:400 .625rem/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:.9rem}
+.frow p{color:var(--muted);font-size:.95rem}
+.frow .go{justify-self:end;font:400 .625rem/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:.5rem;transition:border-color .4s,color .4s;white-space:nowrap}
 .frow:hover .go{border-color:var(--gold);color:var(--gold)}
-.frow.flag .n,.frow.flag h3{color:var(--gold)}
+.frow.flag .n{color:var(--ink)}
 @media (max-width:900px){.frow{grid-template-columns:3rem minmax(0,1fr)}.frow p,.frow .go{grid-column:2}.frow .go{justify-self:start}}
 .fpreview{position:fixed;left:0;top:0;z-index:40;width:280px;aspect-ratio:4/5;overflow:hidden;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.85);transition:opacity .4s var(--ease),transform .6s var(--ease)}
 .fpreview.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
@@ -213,10 +220,10 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 .talks .ph img{width:100%;height:100%;object-fit:cover}
 .talks h2{font-size:clamp(2.4rem,5vw,4.4rem);line-height:.95;margin:1.2rem 0 2.4rem}
 .talk-list{list-style:none;margin:0;padding:0;counter-reset:t}
-.talk-list li{counter-increment:t;display:grid;grid-template-columns:3.2rem minmax(0,1fr);padding:1.1rem 0;border-top:1px solid var(--line);font:300 clamp(1.3rem,2.2vw,1.9rem)/1.2 var(--serif);transition:color .5s,padding .7s var(--ease)}
-.talk-list li::before{content:counter(t,decimal-leading-zero);font:400 .7rem/2.6 var(--sans);letter-spacing:.14em;color:var(--muted)}
+.talk-list li{counter-increment:t;display:grid;grid-template-columns:3.2rem minmax(0,1fr);padding:1.1rem 0;border-top:1px solid var(--line);font:400 clamp(1.2rem,2vw,1.7rem)/1.25 var(--serif);transition:color .5s,padding .7s var(--ease)}
+.talk-list li::before{content:counter(t,decimal-leading-zero);font:400 .625rem/2.8 var(--mono);letter-spacing:.14em;color:var(--muted)}
 .talk-list li:hover{color:var(--gold);padding-left:.6rem}
-.textlink{display:inline-flex;gap:.8rem;align-items:center;margin-top:2.4rem;font:400 .72rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;border-bottom:1px solid var(--gold);padding-bottom:.6rem;color:var(--gold);justify-self:start}
+.textlink{display:inline-flex;gap:.8rem;align-items:center;margin-top:2.4rem;font:400 .625rem/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;border-bottom:1px solid var(--gold);padding-bottom:.6rem;color:var(--gold);justify-self:start}
 
 /* test */
 .test{padding-block:clamp(6rem,14vh,10rem);border-top:1px solid var(--line)}
@@ -224,22 +231,23 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 @media (max-width:900px){.test-grid{grid-template-columns:1fr}}
 .test h2{font-size:clamp(2.4rem,5vw,4.4rem);line-height:.95;margin:1.2rem 0 2.4rem}
 .qs{list-style:none;margin:0;padding:0}
-.qs label{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.5rem;align-items:center;padding:1.1rem 0;border-top:1px solid var(--line);cursor:pointer;color:rgba(236,230,219,.82);transition:color .4s}
+.qs label{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.5rem;align-items:center;padding:1.1rem 0;border-top:1px solid var(--line);cursor:pointer;color:var(--muted);transition:color .4s}
 .qs li:last-child label{border-bottom:1px solid var(--line)}
-.qs input{appearance:none;width:44px;height:24px;border-radius:999px;border:1px solid rgba(236,230,219,.35);position:relative;cursor:pointer;margin:0;transition:background .5s var(--ease),border-color .5s}
+.qs input{appearance:none;width:44px;height:24px;border-radius:999px;border:1px solid var(--muted);position:relative;cursor:pointer;margin:0;transition:background .5s var(--ease),border-color .5s}
 .qs input::after{content:"";position:absolute;left:3px;top:50%;width:16px;height:16px;border-radius:50%;background:var(--ink);transform:translateY(-50%);transition:transform .5s var(--ease),background .5s}
 .qs input:checked{background:var(--gold);border-color:var(--gold)}
 .qs input:checked::after{transform:translate(20px,-50%);background:var(--gold-ink)}
 .qs label:has(input:checked){color:var(--ink)}
 .result{position:sticky;top:6rem;display:grid;gap:1.6rem;border:1px solid var(--line);padding:clamp(1.5rem,3vw,2.6rem);background:var(--bg-2)}
 @media (max-width:900px){.result{position:static}}
-.result .score{font:300 clamp(5rem,10vw,8rem)/.8 var(--serif);font-variant-numeric:tabular-nums}
+.result .score{font:400 clamp(5rem,10vw,8rem)/.8 var(--serif);font-variant-numeric:tabular-nums}
 .result .score small{font-size:.3em;color:var(--muted)}
-.result h3{font-size:2.2rem;font-style:italic;color:var(--gold)}
-.result p{color:rgba(236,230,219,.78)}
+.result h3{font:300 italic 2.2rem/1.1 var(--serif-it)}
+.result p{color:var(--muted)}
 .scale{height:1px;background:var(--line);position:relative}
 .scale i{position:absolute;left:0;top:0;height:1px;background:var(--gold);width:0;transition:width .8s var(--ease)}
 .scale-l{display:flex;justify-content:space-between;margin-top:.8rem}
+.people,.hero{color:#EDE8DF}
 
 /* apply */
 .apply{padding-block:clamp(6rem,14vh,10rem);border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,5vw,6rem)}
@@ -251,27 +259,27 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 @media (max-width:900px){.apply .ph{display:none}}
 form{display:grid;gap:2.2rem;align-content:start}
 .field{display:grid;gap:.6rem}
-.field label{font:400 .6875rem/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
-input[type=text],textarea,select{font:300 1.4rem/1.3 var(--serif);color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line);padding:.5rem 0 .8rem;width:100%;border-radius:0;transition:border-color .4s}
+.field label{font:400 .625rem/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+input[type=text],textarea,select{font:400 1.3rem/1.3 var(--serif);color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line);padding:.5rem 0 .8rem;width:100%;border-radius:0;transition:border-color .4s}
 select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(-45deg,transparent 50%,var(--muted) 50%);background-position:calc(100% - 12px) 55%,calc(100% - 6px) 55%;background-size:6px 6px;background-repeat:no-repeat}
 select option{background:var(--bg-2);color:var(--ink)}
 textarea{min-height:5.5rem;resize:vertical}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold)}
-::placeholder{color:rgba(236,230,219,.28)}
-.submit{justify-self:start;display:inline-flex;align-items:center;gap:1rem;background:var(--gold);color:var(--gold-ink);border:0;padding:1.2rem 2rem;font:500 .75rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:background .4s}
-.submit:hover{background:var(--ink)}
+::placeholder{color:var(--muted);opacity:.55}
+.submit{justify-self:start;display:inline-flex;align-items:center;gap:1rem;background:var(--gold);color:var(--gold-ink);border:0;padding:1.3rem 2.2rem;font:400 .625rem/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;cursor:pointer;transition:background .4s}
+.submit:hover{background:var(--muted)}
 .err{font-size:.85rem;color:#E0876A}
 .out{display:grid;gap:1.2rem;border:1px solid var(--gold);padding:1.6rem}
-.out pre{margin:0;white-space:pre-wrap;font:300 1.15rem/1.5 var(--serif);overflow-x:auto}
+.out pre{margin:0;white-space:pre-wrap;font:300 1rem/1.6 var(--sans);overflow-x:auto}
 .out .row{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:center}
-.out button,.out a{background:none;border:0;padding:0 0 .5rem;border-bottom:1px solid var(--gold);color:var(--gold);font:400 .7rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;cursor:pointer}
+.out button,.out a{background:none;border:0;padding:0 0 .5rem;border-bottom:1px solid var(--gold);color:var(--gold);font:400 .625rem/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;cursor:pointer}
 .hint{font-size:.85rem;color:var(--muted)}
 
 /* footer */
 footer{border-top:1px solid var(--line);padding-block:4rem 3rem;display:grid;gap:3rem}
-footer .huge{font:300 clamp(3.6rem,13vw,13rem)/.85 var(--serif);letter-spacing:-.04em}
-footer .huge em{color:var(--gold)}
-footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5rem;font-size:.8125rem;color:var(--muted)}
+footer .huge{font:400 clamp(3.6rem,13vw,13rem)/.86 var(--serif);letter-spacing:-.03em}
+footer .huge em{color:var(--muted)}
+footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5rem;font:400 .625rem/1.6 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){body::after,.scroll-cue i{animation:none}}
 </style>
 <script>document.documentElement.classList.add('js')</script>
@@ -297,7 +305,7 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5
 
 <main id="top">
 
-  <section class="hero" aria-labelledby="h1">
+  <section class="hero" data-th="dark" aria-labelledby="h1">
     <div class="bgimg"><img class="bw" src="img/hero.jpg" alt="Евгений Махиня с микрофоном" width="1092" height="1092" fetchpriority="high"></div>
     <div class="hero-in">
       <span class="label hero-el">Евгений Махиня · предприниматель, ментор</span>
@@ -309,13 +317,13 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5
     </div>
   </section>
 
-  <section class="statement pad" aria-label="О себе">
-    <span class="label">Вместо предисловия</span>
+  <section class="statement pad" data-th="light" aria-label="О себе">
+    <span class="idx">01 / 08</span><span class="label">Вместо предисловия</span>
     <p id="statement">Я родился в военном городке, где живёт меньше тысячи человек. Прошёл улицу, уголовные дела и два года в страшном сне. Сегодня у меня компания с офисами в пяти городах, свой бизнес-кэмп и люди рядом, которые верят. Здесь я рассказываю, как это устроено изнутри.</p>
     <div class="sign"><img class="bw" src="img/portrait.jpg" alt="" loading="lazy"><span>Евгений Махиня, 33 года</span></div>
   </section>
 
-  <div class="pad">
+  <div class="pad" data-th="light">
     <div class="figures" role="list">
       <div class="fig" role="listitem"><b><span data-count="150">150</span><small>млн+</small></b><span>в год делает команда на банкротстве физлиц</span></div>
       <div class="fig" role="listitem"><b><span data-count="5">5</span><small>городов</small></b><span>Тула, Омск, Новосибирск, Москва, Новомосковск</span></div>
@@ -324,9 +332,9 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5
     </div>
   </div>
 
-  <section class="chapters" id="chapters" aria-labelledby="ch-h">
+  <section class="chapters" id="chapters" data-th="light" aria-labelledby="ch-h">
     <div class="chapters-head pad">
-      <div><span class="label">Выброс · шесть глав</span><h2 id="ch-h" style="margin-top:1.2rem">История, <em>которую я долго не рассказывал</em></h2></div>
+      <div><span class="idx">02 / 08</span><span class="label">Выброс · шесть глав</span><h2 id="ch-h" style="margin-top:1.2rem">История, <em>которую я долго не рассказывал</em></h2></div>
       <p>Раньше я делился ею из чувств. Сейчас это факты, и в них нет драмы. Цель сторителлинга — исповедь.</p>
     </div>
     <div class="pin" id="pin">
@@ -360,18 +368,18 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5
     </div>
   </section>
 
-  <section class="artwork pad" aria-label="Картина «Свобода»">
+  <section class="artwork pad" data-th="light" aria-label="Картина «Свобода»">
     <div class="frame" data-cursor><div class="in"><img src="img/painting.jpg" alt="Картина «Свобода» с надписями уровней 2D, 3D, 4D" loading="lazy"></div></div>
     <div class="plaque">
-      <span class="label">Экспонат</span>
+      <span class="idx">03 / 08</span><span class="label">Экспонат</span>
       <blockquote>«Переход в реальность 3D начался со слов: я решил — будет так»</blockquote>
       <p class="cap">«Свобода». Картина, написанная на тренинге. На ней уровни 2D, 3D и 4D, возраст 33 и слова «принятие», «открытость миру», «преобразование опыта».</p>
     </div>
   </section>
 
-  <section class="method pad" id="method" aria-labelledby="m-h">
+  <section class="method pad" id="method" data-th="light" aria-labelledby="m-h">
     <div class="method-head">
-      <div><span class="label">Метод</span><h2 id="m-h" style="margin-top:1.2rem">Из 2D <em>в 3D</em></h2></div>
+      <div><span class="idx">04 / 08</span><span class="label">Метод</span><h2 id="m-h" style="margin-top:1.2rem">Из 2D <em>в 3D</em></h2></div>
       <p>Мы каждый день запускаем день вчерашний: подгружаем прошлый опыт, логику, прошлые решения. Если они не привели в точку Б, зачем их повторять?</p>
     </div>
     <div class="dims">
@@ -412,21 +420,21 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5
     </div>
   </section>
 
-  <section class="people" aria-labelledby="p-h">
+  <section class="people" data-th="dark" aria-labelledby="p-h">
     <div class="bgimg"><img class="bw" src="img/team.jpg" alt="Команда на сцене" loading="lazy"></div>
     <div class="people-in">
-      <h2 id="p-h">Всё, что сегодня происходит в моей жизни, — <em class="gold">благодаря людям</em></h2>
+      <h2 id="p-h">Всё, что сегодня происходит в моей жизни, — <em>благодаря людям</em></h2>
       <div class="side">
-        <span class="label">Бизнес-кэмп · Подмосковье</span>
+        <span class="idx">05 / 08</span><span class="label">Бизнес-кэмп · Подмосковье</span>
         <p>Три дня, сто предпринимателей, спикеры, групповая работа и вечер без алкоголя. Кэмп я боялся делать много лет, а потом решил.</p>
         <div class="nums"><div><b data-count="100">100</b><span>участников</span></div><div><b data-count="17">17</b><span>пошли в менторство</span></div></div>
       </div>
     </div>
   </section>
 
-  <section class="formats pad" id="formats" aria-labelledby="f-h">
+  <section class="formats pad" id="formats" data-th="dark" aria-labelledby="f-h">
     <div class="formats-head">
-      <div><span class="label">Форматы</span><h2 id="f-h" style="margin-top:1.2rem">Четыре ступени <em>перехода</em></h2></div>
+      <div><span class="idx">06 / 08</span><span class="label">Форматы</span><h2 id="f-h" style="margin-top:1.2rem">Четыре ступени <em>перехода</em></h2></div>
       <p>Можно начать с истории и дойти до трёх месяцев работы рядом со мной. Каждая ступень — законченный шаг.</p>
     </div>
     <div class="flist" id="flist">
@@ -460,7 +468,7 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5
     </div>
   </section>
 
-  <section class="talks pad" aria-labelledby="t-h">
+  <section class="talks pad" data-th="dark" aria-labelledby="t-h">
     <div class="ph"><img class="bw" src="img/podcast.jpg" alt="Евгений в студии подкаста" loading="lazy"></div>
     <div style="display:grid">
       <span class="label">Разговоры · reels и подкасты</span>
@@ -479,10 +487,10 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5
     </div>
   </section>
 
-  <section class="test pad" id="test" aria-labelledby="q-h">
+  <section class="test pad" id="test" data-th="light" aria-labelledby="q-h">
     <div class="test-grid">
       <div>
-        <span class="label">Диагностика · одна минута</span>
+        <span class="idx">07 / 08</span><span class="label">Диагностика · одна минута</span>
         <h2 id="q-h">На каком ты <em>уровне?</em></h2>
         <ul class="qs" id="qlist">
           <li><label for="q1"><span>Часто прокручиваю прошлое или тревожусь о будущем</span><input type="checkbox" id="q1"></label></li>
@@ -505,9 +513,9 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5
     </div>
   </section>
 
-  <section class="apply pad" id="apply" aria-labelledby="a-h">
+  <section class="apply pad" id="apply" data-th="light" aria-labelledby="a-h">
     <div class="intro">
-      <span class="label">Заявка</span>
+      <span class="idx">08 / 08</span><span class="label">Заявка</span>
       <h2 id="a-h">Напишите, <em>с чем идёте</em></h2>
       <p>Заполните форму, и мы соберём из неё сообщение. Отправьте его в Direct, команда ответит в течение дня.</p>
       <div class="ph"><img class="bw" src="img/walk.jpg" alt="Евгений Махиня" loading="lazy"></div>
@@ -541,7 +549,7 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5
 
 </main>
 
-<footer class="pad">
+<footer class="pad" data-th="dark">
   <div class="huge">Жить<br><em>во время</em></div>
   <div class="bottom">
     <span>© Евгений Махиня</span>
@@ -623,8 +631,16 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5
     $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=$(a.getAttribute('href')); if(t){e.preventDefault(); lenis.scrollTo(t,{duration:1.6})}}));
   }
 
+  /* ---------- темы секций: фон плавно меняется ---------- */
+  const TH={dark:{'--bg':'#0B0B0A','--bg-2':'#141413','--ink':'#EDE8DF','--muted':'#8A857C','--line':'rgba(237,232,223,.14)','--gold':'#EDE8DF','--gold-ink':'#0B0B0A'},
+            light:{'--bg':'#ECE8E0','--bg-2':'#E3DED5','--ink':'#141312','--muted':'#77726A','--line':'rgba(20,19,18,.14)','--gold':'#141312','--gold-ink':'#ECE8E0'}};
+  const setTh=k=>gsap.to('html',{...TH[k],duration:.9,ease:'power2.inOut',overwrite:'auto'});
+  const secs=$$('[data-th]'); let curTh='dark';
+  ScrollTrigger.create({start:0,end:'max',onUpdate:()=>{const y=innerHeight*.55; let th=null; for(const sc of secs){const r=sc.getBoundingClientRect(); if(r.top<=y&&r.bottom>y){th=sc.dataset.th;break}} if(th&&th!==curTh){curTh=th;setTh(th)}}});
+
   /* ---------- интро ---------- */
-  gsap.set('.hero h1 .ln > span',{yPercent:110});
+  $$('.hero h1 .ln > span').forEach(sp=>{const t=sp.querySelector('em')||sp; t.innerHTML=[...t.textContent].map(ch=>ch===' '?' ':'<span class="c">'+ch+'</span>').join('')});
+  gsap.set('.hero h1 .c',{yPercent:110,rotate:3});
   gsap.set('.hero-el',{opacity:0,y:20});
   gsap.set('.hero .bgimg img',{scale:1.18,filter:'grayscale(1) brightness(.5)'});
   const cnt={v:0};
@@ -635,7 +651,7 @@ footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5
     .to(loader,{clipPath:'inset(0% 0% 100% 0%)',duration:1.1,ease:'power4.inOut'},'-=.2')
     .set(loader,{display:'none'})
     .to('.hero .bgimg img',{scale:1,filter:'grayscale(1) brightness(.92)',duration:2.4,ease:'power3.out'},'-=.9')
-    .to('.hero h1 .ln > span',{yPercent:0,duration:1.4,stagger:.14,ease:'power4.out'},'-=2.1')
+    .to('.hero h1 .c',{yPercent:0,rotate:0,duration:1.3,stagger:.035,ease:'power4.out'},'-=2.1')
     .to('.hero-el',{opacity:1,y:0,duration:1,stagger:.12,ease:'power3.out'},'-=1');
 
   /* hero параллакс */
