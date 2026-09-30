@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Евгений Махиня · Жить во время</title>
+<meta name="description" content="Евгений Махиня: путь из 2D в 3D. История, метод, бизнес-кэмп и менторство для предпринимателей.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Евгений Махиня · Жить во время">
+<meta property="og:description" content="Как бессознательное сделать сознательным. История, метод, кэмп и менторство.">
+<meta property="og:image" content="img/hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Onest:wght@400;500;700&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: длинная «исповедь» с липкой фотоплёнкой в истории; сквозной мотив — мазки уровней с картины «Свобода» */
+:root{
+  --bg:#F1F2F4; --surface:#FFFFFF; --fg:#15171C; --muted:#5A6070; --line:#D8DBE1;
+  --accent:#E0741C; --accent-ink:#FFFFFF;
+  --b-yellow:#E9B521; --b-green:#2F9A5E; --b-red:#CC3A26; --b-blue:#2D57C8; --b-violet:#6A3E9E;
+  --f-display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-body:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-hand:"Caveat","Comic Sans MS",cursive;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --s1:.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4.5rem;
+  --wrap:74rem; --gut:max(16px,4vw);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1116; --surface:#171A21; --fg:#EEF0F4; --muted:#99A0AF; --line:#282D38;
+  --accent:#F28A33; --accent-ink:#14100C;
+  --b-yellow:#F0C23A; --b-green:#3DB373; --b-red:#E24D37; --b-blue:#4A74E6; --b-violet:#8C5FC4;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1116; --surface:#171A21; --fg:#EEF0F4; --muted:#99A0AF; --line:#282D38;
+  --accent:#F28A33; --accent-ink:#14100C;
+  --b-yellow:#F0C23A; --b-green:#3DB373; --b-red:#E24D37; --b-blue:#4A74E6; --b-violet:#8C5FC4;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 1.0625rem/1.6 var(--f-body);padding-inline:var(--gut);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--wrap);margin-inline:auto}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.08;letter-spacing:-.01em}
+h2{font-size:clamp(1.75rem,4vw,2.9rem);font-weight:700}
+h3{font-size:1.125rem;font-weight:700;line-height:1.25}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.eyebrow{font:500 .75rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:1.1875rem;color:var(--muted);max-width:40rem}
+section{padding-block:var(--s5)}
+.sec-head{display:grid;gap:var(--s2);margin-bottom:var(--s4);max-width:46rem}
+.photo{border-radius:10px;overflow:hidden;background:var(--line)}
+.photo img{width:100%;height:100%;object-fit:cover}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);margin-inline:calc(-1*var(--gut));padding:.75rem var(--gut)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--s2)}
+.logo{font:900 .95rem/1 var(--f-display);letter-spacing:.02em;text-decoration:none}
+.logo span{color:var(--accent)}
+.nav{display:flex;gap:var(--s3);align-items:center;font-size:.9375rem}
+.nav a{text-decoration:none;color:var(--muted)}
+.nav a:hover{color:var(--fg)}
+@media (max-width:760px){.nav a:not(.btn){display:none}}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:linear-gradient(90deg,var(--b-yellow),var(--b-green),var(--b-red),var(--b-blue),var(--b-violet));transform-origin:left;transform:scaleX(0)}
+
+.btn{display:inline-flex;align-items:center;gap:.5rem;justify-content:center;font:700 .9375rem/1 var(--f-body);padding:.95rem 1.3rem;border-radius:999px;text-decoration:none;border:2px solid var(--fg);color:var(--fg);background:transparent;cursor:pointer;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.solid{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.sm{padding:.6rem 1rem;font-size:.875rem}
+
+/* hero */
+.hero{padding-block:var(--s4) var(--s4);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:var(--s4);align-items:center}
+@media (max-width:900px){.hero{grid-template-columns:1fr}}
+.hero-text{display:grid;gap:var(--s3);min-width:0}
+.h1{font-size:clamp(2.8rem,8vw,6.2rem);font-weight:900;line-height:.92;letter-spacing:-.03em}
+.h1 .line{display:block;overflow:hidden;padding-bottom:.06em}
+.h1 .line span{display:inline-block}
+.h1 em{font-style:normal;color:var(--accent)}
+.hero .sub{font:700 clamp(1rem,1.8vw,1.25rem)/1.35 var(--f-display);max-width:32rem}
+.cta{display:flex;flex-wrap:wrap;gap:var(--s2)}
+
+.stage{position:relative;aspect-ratio:1/1.08;max-width:100%;width:100%}
+.bands{position:absolute;inset:6% -6% 0 -10%;transform:rotate(-8deg);display:grid;grid-template-rows:repeat(5,1fr);gap:0;z-index:0}
+.band{border-radius:40px 8px 60px 10px/20px 40px 12px 30px;display:flex;align-items:center;justify-content:flex-end;padding-right:6%;font:900 clamp(.9rem,2vw,1.3rem)/1 var(--f-display);color:rgba(255,255,255,.95);letter-spacing:.04em}
+.band:nth-child(1){background:var(--b-yellow);color:#2a2106;margin-left:8%}
+.band:nth-child(2){background:var(--b-green);margin-right:4%}
+.band:nth-child(3){background:var(--b-red);margin-left:3%}
+.band:nth-child(4){background:var(--b-blue);margin-right:10%}
+.band:nth-child(5){background:var(--b-violet);margin-left:12%}
+.hero-photo{position:absolute;z-index:1;left:12%;right:12%;top:0;bottom:8%;border-radius:12px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.45)}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.scribble{position:absolute;inset:0;z-index:2;pointer-events:none;width:100%;height:100%;overflow:visible}
+.scribble path{fill:none;stroke:var(--accent);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.note{position:absolute;z-index:3;font:700 clamp(1.5rem,3.4vw,2.2rem)/1 var(--f-hand);color:var(--accent);white-space:nowrap}
+.note.n1{right:-2%;top:-2%;transform:rotate(6deg)}
+.note.n2{left:-4%;bottom:-2%;transform:rotate(-4deg);color:var(--fg)}
+@media (max-width:900px){.note.n1{right:2%}.note.n2{left:2%}.bands{inset:6% 0 0 0}}
+
+/* marquee */
+.marquee{margin-inline:calc(-1*var(--gut));overflow:hidden;border-block:2px solid var(--fg);padding-block:.9rem;background:var(--fg);color:var(--bg)}
+.marquee .track{display:flex;gap:3rem;width:max-content;animation:run 38s linear infinite;font:700 clamp(1rem,2.2vw,1.5rem)/1 var(--f-display);white-space:nowrap}
+.marquee .track span{display:inline-flex;align-items:center;gap:3rem}
+.marquee .track span::after{content:"";width:.7em;height:.7em;border-radius:50%;background:var(--accent)}
+@keyframes run{to{transform:translateX(-50%)}}
+
+/* facts */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+.fact{padding:var(--s3) var(--s2) var(--s3) 0;display:grid;gap:.4rem;align-content:start}
+.fact b{font:900 clamp(1.7rem,3.6vw,2.6rem)/1 var(--f-display);font-variant-numeric:tabular-nums}
+.fact span{font-size:.9375rem;color:var(--muted);line-height:1.4}
+@media (max-width:760px){.facts{grid-template-columns:1fr 1fr}.fact{padding-right:var(--s1)}}
+
+/* story */
+.story{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:var(--s4)}
+@media (max-width:900px){.story{grid-template-columns:1fr}}
+.story-side{position:sticky;top:5rem;align-self:start;display:grid;gap:var(--s2)}
+@media (max-width:900px){.story-side{position:static}}
+.reel{position:relative;aspect-ratio:4/4.4;border-radius:12px;overflow:hidden;background:#111}
+.reel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .7s ease,transform 1.2s ease}
+.reel img.on{opacity:1;transform:scale(1)}
+.reel .age-big{position:absolute;left:1rem;bottom:.6rem;font:900 clamp(3rem,7vw,5rem)/1 var(--f-display);color:#fff;text-shadow:0 4px 30px rgba(0,0,0,.5);font-variant-numeric:tabular-nums;z-index:2}
+.reel .cap{position:absolute;right:1rem;bottom:1rem;z-index:2;font:500 .7rem/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.45);padding:.35rem .55rem;border-radius:4px;max-width:60%}
+.reel::after{content:"";position:absolute;inset:50% 0 0 0;background:linear-gradient(transparent,rgba(0,0,0,.55));z-index:1}
+@media (max-width:900px){.reel{display:none}}
+.quote{font:700 1.9rem/1.1 var(--f-hand);color:var(--accent)}
+.tl{list-style:none;margin:0;padding:0;display:grid;position:relative}
+.tl::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--line)}
+.tl .fill{position:absolute;left:0;top:0;width:2px;height:100%;background:var(--accent);transform-origin:top;transform:scaleY(0)}
+.tl li{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:var(--s2);padding:var(--s2) 0 var(--s2) var(--s3);border-top:1px solid var(--line);transition:opacity .4s}
+.tl .age{font:900 1.5rem/1 var(--f-display);font-variant-numeric:tabular-nums}
+.tl .age small{display:block;font:500 .7rem/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:.35rem}
+.tl p{max-width:38rem}
+.tl li.turn .age{color:var(--accent)}
+.tl .phase{display:block;font:500 .75rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;padding:var(--s4) 0 var(--s1) var(--s3);color:var(--muted);border:0}
+.tl .mob{display:none;grid-column:1/-1;border-radius:8px;overflow:hidden;aspect-ratio:16/10}
+.tl .mob img{width:100%;height:100%;object-fit:cover}
+@media (max-width:900px){.tl .mob{display:block}}
+
+/* painting banner */
+.painting{position:relative;margin-inline:calc(-1*var(--gut));height:clamp(220px,34vw,420px);overflow:hidden}
+.painting img{position:absolute;left:0;top:-15%;width:100%;height:130%;object-fit:cover}
+.painting .over{position:absolute;inset:0;display:grid;align-content:end;padding:var(--s3) var(--gut);background:linear-gradient(transparent 30%,rgba(10,10,14,.75));color:#fff}
+.painting .over p{font:700 clamp(1.4rem,3.4vw,2.4rem)/1.1 var(--f-hand);max-width:40rem}
+.painting .over span{font:500 .72rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;opacity:.8;margin-top:.6rem}
+
+/* method */
+.levels{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);perspective:1100px}
+@media (max-width:760px){.levels{grid-template-columns:1fr}}
+.lvl{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:var(--s3);display:grid;gap:var(--s2);align-content:start;position:relative;overflow:hidden;transform-style:preserve-3d}
+.lvl::before{content:"";position:absolute;inset:0 0 auto 0;height:8px}
+.lvl.d2{background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:22px 22px;background-color:var(--surface)}
+.lvl.d2::before{background:linear-gradient(90deg,var(--b-yellow),var(--b-red))}
+.lvl.d3{box-shadow:0 40px 80px -40px color-mix(in srgb,var(--b-blue) 60%,transparent);background:radial-gradient(circle at var(--mx,70%) var(--my,20%),color-mix(in srgb,var(--b-blue) 16%,var(--surface)),var(--surface) 60%)}
+.lvl.d3::before{background:linear-gradient(90deg,var(--b-green),var(--b-blue),var(--b-violet))}
+.lvl .tag{font:900 3.2rem/1 var(--f-display)}
+.lvl.d2 .tag{color:var(--b-red)}
+.lvl.d3 .tag{color:var(--b-blue);text-shadow:1px 1px 0 var(--b-violet),2px 2px 0 var(--b-violet),3px 3px 0 var(--b-violet),4px 4px 0 var(--b-violet),5px 5px 0 var(--b-violet),6px 6px 0 var(--b-violet)}
+.lvl ul{margin:0;padding-left:1.1rem;display:grid;gap:.4rem}
+.arrow-row{display:flex;align-items:center;gap:var(--s2);margin-block:var(--s3);font:700 1.6rem/1.1 var(--f-hand);color:var(--accent)}
+.arrow-row::after{content:"";flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--accent) 0 10px,transparent 10px 18px)}
+.aspects{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s3)}
+@media (max-width:900px){.aspects{grid-template-columns:1fr 1fr}}
+.asp{display:grid;gap:.6rem;align-content:start}
+.asp .photo{aspect-ratio:3/4}
+.asp .photo img{transition:transform .8s ease}
+.asp:hover .photo img{transform:scale(1.05)}
+.asp .n{font:500 .72rem/1 var(--f-mono);letter-spacing:.1em;color:var(--accent)}
+.asp p{font-size:.9375rem;color:var(--muted);line-height:1.45}
+.rules{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:var(--s4)}
+.rule{border:1.5px solid var(--line);border-radius:999px;padding:.55rem 1rem;font-size:.9375rem}
+.rule b{color:var(--accent)}
+
+/* quiz */
+.quiz{background:var(--fg);color:var(--bg);border-radius:14px;padding:clamp(1.25rem,4vw,3rem);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s4)}
+@media (max-width:900px){.quiz{grid-template-columns:1fr}}
+.quiz .eyebrow{color:color-mix(in srgb,var(--bg) 60%,var(--fg))}
+.quiz h2{color:var(--bg)}
+.qlist{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.qlist label{display:flex;gap:.8rem;align-items:flex-start;padding:.75rem .9rem;border-radius:8px;border:1.5px solid color-mix(in srgb,var(--bg) 22%,var(--fg));cursor:pointer;line-height:1.4;transition:border-color .15s,background .15s,transform .15s}
+.qlist label:hover{transform:translateX(4px)}
+.qlist input{appearance:none;flex:none;width:1.25rem;height:1.25rem;margin-top:.1rem;border-radius:4px;border:2px solid color-mix(in srgb,var(--bg) 55%,var(--fg));display:grid;place-content:center;cursor:pointer}
+.qlist input:checked{background:var(--accent);border-color:var(--accent)}
+.qlist input:checked::after{content:"";width:.55rem;height:.3rem;border-left:2px solid var(--accent-ink);border-bottom:2px solid var(--accent-ink);transform:rotate(-45deg) translate(1px,-1px)}
+.qlist label:has(input:checked){border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--fg))}
+.result{display:grid;gap:var(--s2);align-content:start}
+.meter{height:14px;border-radius:999px;background:linear-gradient(90deg,var(--b-blue),var(--b-green) 40%,var(--b-yellow) 65%,var(--b-red));position:relative;margin-top:var(--s1)}
+.meter i{position:absolute;top:50%;width:26px;height:26px;border-radius:50%;background:var(--bg);border:4px solid var(--accent);transform:translate(-50%,-50%);transition:left .45s cubic-bezier(.2,.9,.2,1.2)}
+.meter-l{display:flex;justify-content:space-between;font:500 .72rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:color-mix(in srgb,var(--bg) 60%,var(--fg));margin-top:.6rem}
+.result .big{font:900 clamp(2.4rem,6vw,3.8rem)/1 var(--f-display)}
+.result p{color:color-mix(in srgb,var(--bg) 82%,var(--fg))}
+.quiz .btn{border-color:var(--bg);color:var(--bg)}
+.quiz .btn.solid{border-color:var(--accent);color:var(--accent-ink)}
+.row{display:flex;flex-wrap:wrap;gap:.6rem}
+
+/* camp feature */
+.camp{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:var(--s4);align-items:center}
+@media (max-width:900px){.camp{grid-template-columns:1fr}}
+.camp .photo{aspect-ratio:4/3.4}
+.camp-text{display:grid;gap:var(--s2);align-content:start}
+.camp-stats{display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--fg);margin-top:var(--s2)}
+.camp-stats div{padding-block:var(--s2);display:grid;gap:.3rem}
+.camp-stats b{font:900 2.2rem/1 var(--f-display);font-variant-numeric:tabular-nums}
+.camp-stats span{font-size:.9rem;color:var(--muted)}
+
+/* products ladder */
+.ladder{display:grid;border-top:2px solid var(--fg)}
+.step{display:grid;grid-template-columns:4.5rem minmax(0,1.3fr) minmax(0,1fr) auto;gap:var(--s3);align-items:start;padding-block:var(--s3);border-bottom:1px solid var(--line);position:relative}
+@media (max-width:900px){.step{grid-template-columns:3rem minmax(0,1fr)}.step .meta,.step .go{grid-column:2}}
+.step .no{font:900 2.4rem/1 var(--f-display);color:transparent;-webkit-text-stroke:1.5px var(--fg)}
+.step.flag .no{-webkit-text-stroke:0;color:var(--accent)}
+.step h3{font-size:1.4rem;margin-bottom:.4rem}
+.step .kind{font:500 .72rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;display:block}
+.step p{color:var(--muted);max-width:34rem}
+.meta{list-style:none;margin:0;padding:0;display:grid;gap:.35rem;font-size:.9375rem}
+.meta li{display:flex;gap:.5rem}
+.meta li::before{content:"—";color:var(--accent)}
+.step.flag{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 10%,transparent),transparent 70%)}
+.pill{display:inline-block;font:700 .75rem/1 var(--f-body);background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:.35rem .6rem;margin-left:.4rem;vertical-align:middle}
+
+/* episodes */
+.eps{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:var(--s4);align-items:start}
+@media (max-width:900px){.eps{grid-template-columns:1fr}}
+.eps .photo{aspect-ratio:4/4.6}
+.ep-list{list-style:none;margin:0;padding:0;display:grid;counter-reset:ep}
+.ep-list li{counter-increment:ep;display:grid;grid-template-columns:3rem minmax(0,1fr);gap:var(--s2);padding-block:.9rem;border-top:1px solid var(--line);font:700 clamp(1rem,1.8vw,1.25rem)/1.3 var(--f-display);transition:padding .25s,color .25s}
+.ep-list li::before{content:counter(ep,decimal-leading-zero);font:500 .8rem/1.9 var(--f-mono);color:var(--muted)}
+.ep-list li:hover{padding-left:.5rem;color:var(--accent)}
+
+/* audience */
+.who{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3)}
+@media (max-width:900px){.who{grid-template-columns:1fr}}
+.who article{display:grid;gap:.7rem;align-content:start;padding-top:var(--s2);border-top:6px solid var(--c)}
+.who p{color:var(--muted)}
+.who .soon{font:700 1.35rem/1.1 var(--f-hand);color:var(--accent)}
+
+/* voice */
+.voice{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3)}
+@media (max-width:900px){.voice{grid-template-columns:1fr}}
+.voice blockquote{margin:0;font:700 1.25rem/1.3 var(--f-display);display:grid;gap:.8rem;align-content:start}
+.voice cite{font:500 .75rem/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-style:normal}
+
+/* form */
+.apply{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:var(--s4);align-items:start}
+@media (max-width:900px){.apply{grid-template-columns:1fr}}
+.apply .photo{aspect-ratio:4/5;margin-top:var(--s2)}
+@media (max-width:900px){.apply .photo{display:none}}
+form{display:grid;gap:var(--s2);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:clamp(1.25rem,3vw,2rem)}
+.field{display:grid;gap:.4rem}
+.field label{font-weight:700;font-size:.9375rem}
+input[type=text],textarea,select{font:inherit;color:var(--fg);background:var(--bg);border:1.5px solid var(--line);border-radius:8px;padding:.75rem .9rem;width:100%}
+textarea{min-height:6rem;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+.hint{font-size:.8125rem;color:var(--muted)}
+.err{font-size:.8125rem;color:var(--b-red)}
+.out{display:grid;gap:var(--s2);background:var(--bg);border:1.5px dashed var(--accent);border-radius:10px;padding:var(--s2)}
+.out pre{margin:0;white-space:pre-wrap;font:500 .875rem/1.5 var(--f-mono);overflow-x:auto}
+
+footer{border-top:2px solid var(--fg);padding-block:var(--s3) var(--s4);display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--s2);font-size:.9375rem;color:var(--muted)}
+footer b{color:var(--fg)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top">МАХИНЯ<span>.</span></a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#story">История</a>
+      <a href="#method">Метод</a>
+      <a href="#test">Тест</a>
+      <a href="#programs">Программы</a>
+      <a class="btn solid sm" href="#apply">Заявка</a>
+    </nav>
+  </div>
+  <i class="progress" aria-hidden="true"></i>
+</header>
+
+<main class="wrap" id="top">
+
+  <section class="hero" aria-labelledby="h1">
+    <div class="hero-text">
+      <span class="eyebrow">Евгений Махиня · предприниматель</span>
+      <h1 id="h1" class="h1"><span class="line"><span>Жить</span></span><span class="line"><span><em>во время</em></span></span></h1>
+      <p class="sub">Как бессознательное сделать сознательным и перейти из 2D в 3D: из жизни прошлым опытом в жизнь фактами и решениями.</p>
+      <p class="lead">Я прошёл этот путь сам: военный городок, улица, уголовные дела, долги, два года «в страшном сне». Сегодня у меня компания с офисами в пяти городах, свой бизнес-кэмп и люди рядом, которые верят. Показываю, как это устроено изнутри.</p>
+      <div class="cta">
+        <a class="btn solid" href="#test">Пройти тест: где ты сейчас</a>
+        <a class="btn" href="#story">Читать историю</a>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="bands" aria-hidden="true">
+        <div class="band">СВОБОДА</div><div class="band">3D</div><div class="band">Н·Н·Н</div><div class="band">СВЯЗИ</div><div class="band">2D</div>
+      </div>
+      <div class="hero-photo"><img src="img/hero.jpg" alt="Евгений Махиня с микрофоном на сцене" width="1092" height="1092" fetchpriority="high"></div>
+      <svg class="scribble" viewBox="0 0 400 430" aria-hidden="true">
+        <path d="M356 46 C 350 92, 312 116, 264 118"/>
+        <path d="M280 104 L 262 118 L 279 131"/>
+      </svg>
+      <span class="note n1">здесь я</span>
+      <span class="note n2">я решил: будет так!</span>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Жить во время</span><span>Я решил — будет так</span><span>Нет Ничего Невозможного</span><span>Благодаря людям</span><span>Отношение определяет отношения</span><span>Лидера формирует окружение</span>
+      <span>Жить во время</span><span>Я решил — будет так</span><span>Нет Ничего Невозможного</span><span>Благодаря людям</span><span>Отношение определяет отношения</span><span>Лидера формирует окружение</span>
+    </div>
+  </div>
+
+  <div class="facts" role="list">
+    <div class="fact" role="listitem"><b><i data-count="150">150</i>+ млн</b><span>в год делает команда на банкротстве физлиц</span></div>
+    <div class="fact" role="listitem"><b><i data-count="5">5</i> офисов</b><span>Тула, Омск, Новосибирск, Москва, Новомосковск</span></div>
+    <div class="fact" role="listitem"><b><i data-count="100">100</i></b><span>предпринимателей приехали на первый бизнес-кэмп</span></div>
+    <div class="fact" role="listitem"><b><i data-count="68">68</i> тыс.</b><span>человек читают историю в Instagram</span></div>
+  </div>
+
+  <section id="story" aria-labelledby="story-h">
+    <div class="story">
+      <aside class="story-side">
+        <span class="eyebrow">Выброс · 100 сторис</span>
+        <h2 id="story-h">История, которую я долго не рассказывал</h2>
+        <div class="reel" id="reel">
+          <img class="on" data-k="family" src="img/family.jpg" alt="Семейное фото из детства" loading="lazy">
+          <img data-k="army" src="img/army.jpg" alt="Армия, 2011 год" loading="lazy">
+          <img data-k="speaker" src="img/speaker.jpg" alt="Чёрно-белый портрет с микрофоном" loading="lazy">
+          <img data-k="walk" src="img/walk.jpg" alt="Евгений в городе" loading="lazy">
+          <img data-k="stage" src="img/stage.jpg" alt="Выступление на сцене UNLIMITED" loading="lazy">
+          <img data-k="team" src="img/team.jpg" alt="Команда дарит портрет на сцене" loading="lazy">
+          <img data-k="camp" src="img/camp.jpg" alt="Бизнес-кэмп: слайд «Благодаря людям»" loading="lazy">
+          <img data-k="portrait" src="img/portrait.jpg" alt="Портрет за столом" loading="lazy">
+          <span class="age-big" id="ageBig">0</span>
+          <span class="cap" id="cap">военный городок</span>
+        </div>
+        <p class="quote">«Цель сторителлинга — исповедь»</p>
+      </aside>
+
+      <ol class="tl" id="tl">
+        <i class="fill" id="tlFill" aria-hidden="true"></i>
+        <li class="phase">Уровень 2D · зацикленный кадр</li>
+        <li data-k="family" data-age="0" data-cap="военный городок"><div class="mob"><img src="img/family.jpg" alt="" loading="lazy"></div><div class="age">0<small>городок</small></div><p>Родился в семье военных, в городке, где живёт меньше тысячи человек. Какая вероятность стать кем-то?</p></li>
+        <li data-k="family" data-age="4" data-cap="мама одна с тремя детьми"><div class="age">4</div><p>Мама уходит от папы и остаётся одна с тремя детьми. Переезды: Будённовск, Ульяновск.</p></li>
+        <li data-k="family" data-age="9" data-cap="Тула, дзюдо"><div class="age">9</div><p>Тула. Вместо кикбоксинга отдают на дзюдо. Появляется обида, и спорт перестаёт радовать.</p></li>
+        <li data-k="family" data-age="13" data-cap="улица и ПДН"><div class="age">13</div><p>Улица, автоматы, игровые клубы, учёт в ПДН. Так я получал внимание, которого не хватало дома.</p></li>
+        <li data-k="army" data-age="18" data-cap="11 декабря 2011, присяга"><div class="mob"><img src="img/army.jpg" alt="" loading="lazy"></div><div class="age">18</div><p>Армия. Единственный способ сбежать из той реальности. Бросил курить, получил младшего сержанта. Армия вернула меня к себе.</p></li>
+        <li data-k="speaker" data-age="21" data-cap="«крутой = плохой»"><div class="age">21–24</div><p>«Крутой = плохой». Жизнь рядом со старшими товарищами, драки, уголовные дела. Первые большие отношения, Ангелина.</p></li>
+        <li data-k="speaker" data-age="24" data-cap="точка до и после"><div class="age">24</div><p>Трагедия, которая разделила жизнь на до и после: суд, домашний арест, 1,2 млн возмещения семье. Злость и чувство несправедливости уходят внутрь.</p></li>
+        <li data-k="speaker" data-age="27" data-cap="жизнь в страшном сне"><div class="mob"><img src="img/speaker.jpg" alt="" loading="lazy"></div><div class="age">27–29<small>страшный сон</small></div><p>Бег по замкнутому кругу. Алкоголь, азарт, предательство себя. Девять классов образования, и я не знаю, куда себя деть.</p></li>
+
+        <li class="phase">Переход · «я решил — будет так»</li>
+        <li class="turn" data-k="walk" data-age="29" data-cap="первое обучение"><div class="mob"><img src="img/walk.jpg" alt="" loading="lazy"></div><div class="age">29</div><p>Ангелина отдаёт свою зарплату на моё первое обучение и дарит ноутбук за 17 000. Через месяц я зарабатываю первые 100 000 и спрашиваю: «А так что, можно было?»</p></li>
+        <li data-k="walk" data-age="29" data-cap="торги и первый лот"><div class="age">29</div><p>Торги по банкротству, первые партнёры. Выигранный лот за 237 тысяч через три месяца приносит 3,4 млн. Я закрываю долг и прошу прощения у семьи погибшего.</p></li>
+        <li data-k="stage" data-age="30" data-cap="Центр защиты заёмщиков"><div class="mob"><img src="img/stage.jpg" alt="" loading="lazy"></div><div class="age">30</div><p>Центр защиты заёмщиков: команда, филиалы, 40 договоров в месяц. Колледж на финансах, MBA, бизнес-миссии в Китай и Дубай. На юбилей 150 человек прилетели от Хабаровска до Сочи.</p></li>
+
+        <li class="phase">Уровень 3D · жить во время</li>
+        <li data-k="team" data-age="31" data-cap="«меняйся сам»"><div class="age">31</div><p>Переезд в Москву, развод, терапия, гештальт, расстановки. Помирился с отцом, впервые за 25 лет бабушка сидит за одним столом с мамой. Возвращаю 15 млн долга за проект, в котором потерял себя.</p></li>
+        <li data-k="camp" data-age="32" data-cap="бизнес-кэмп, 100 человек"><div class="mob"><img src="img/camp.jpg" alt="" loading="lazy"></div><div class="age">32</div><p>Первый бизнес-кэмп на 100 человек. 17 из них идут ко мне в менторство на три месяца. Учусь в институте, чтобы становиться живым: чувствовать, любить.</p></li>
+        <li class="turn" data-k="portrait" data-age="33" data-cap="продолжение следует"><div class="age">33</div><p>Прожил год «как во сне» и заметил это. Рассказываю вам свою историю как наблюдатель. Продолжение следует.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="painting" id="painting">
+    <img src="img/painting.jpg" alt="Картина «Свобода», нарисованная на тренинге" loading="lazy">
+    <div class="over"><p>«Переход в реальность 3D начался со слов: я решил — будет так!»</p><span>Картина «Свобода» · уровни 2D, 3D, 4D</span></div>
+  </div>
+
+  <section id="method" aria-labelledby="method-h">
+    <div class="sec-head">
+      <span class="eyebrow">Метод</span>
+      <h2 id="method-h">Из 2D в 3D</h2>
+      <p class="lead">Мы каждый день запускаем день вчерашний: подгружаем прошлый опыт, логику, прошлые решения. Если они не привели в точку Б, зачем их повторять?</p>
+    </div>
+
+    <div class="levels">
+      <article class="lvl d2">
+        <span class="tag">2D</span>
+        <h3>Жизнь прошлым опытом</h3>
+        <ul>
+          <li>Внимание снаружи: что подумают, как оценят</li>
+          <li>Треугольник «жертва — преследователь — спасатель»</li>
+          <li>Зацикленный кадр: одни и те же сценарии в деньгах и отношениях</li>
+          <li>Решения из обиды, злости, страха потерять</li>
+        </ul>
+      </article>
+      <article class="lvl d3" id="d3">
+        <span class="tag">3D</span>
+        <h3>Жизнь во время</h3>
+        <ul>
+          <li>Опора на факты и на то, что происходит сейчас</li>
+          <li>Вся ответственность на себе: «я решил — будет так»</li>
+          <li>Сила в слабости: тебя видят настоящим</li>
+          <li>Команда и связи вместо одинокого волка</li>
+        </ul>
+      </article>
+    </div>
+
+    <p class="arrow-row">каждый переход требует сепарации от среды</p>
+
+    <div class="aspects">
+      <div class="asp reveal"><div class="photo"><img src="img/podcast.jpg" alt="Евгений в студии подкаста" loading="lazy"></div><span class="n">01 · БИЗНЕС</span><h3>Знания и инструменты</h3><p>Финансы, продажи, команда. Бизнес — это проблема, которую ты решил для себя и можешь решить для других.</p></div>
+      <div class="asp reveal"><div class="photo"><img src="img/portrait.jpg" alt="Евгений за столом с людьми" loading="lazy"></div><span class="n">02 · ЭМОЦИИ</span><h3>Эмоциональный интеллект</h3><p>Какие бывают чувства, откуда триггеры, как перестать жить старыми обидами.</p></div>
+      <div class="asp reveal"><div class="photo"><img src="img/duo.jpg" alt="Тренировка кунг-фу с мастером" loading="lazy"></div><span class="n">03 · ТЕЛО</span><h3>Тело</h3><p>Способность управлять телом — индикатор личности. Бокс, кунг-фу, режим.</p></div>
+      <div class="asp reveal"><div class="photo"><img src="img/robe.jpg" alt="Евгений у окна с видом на горы" loading="lazy"></div><span class="n">04 · ДУХ</span><h3>Дух</h3><p>Прощение, связь с родом, благодарность. Випассана и тишина.</p></div>
+    </div>
+
+    <div class="rules" aria-label="Правила">
+      <span class="rule"><b>Н·Н·Н</b> Нет Ничего Невозможного</span>
+      <span class="rule"><b>1 раз в квартал</b> новый тренинг или навык</span>
+      <span class="rule"><b>10%</b> дохода возвращать людям</span>
+      <span class="rule"><b>Окружение</b> формирует лидера</span>
+    </div>
+  </section>
+
+  <section id="test" aria-labelledby="test-h">
+    <div class="quiz">
+      <div style="display:grid;gap:var(--s3);align-content:start;min-width:0">
+        <span class="eyebrow">Тест · 1 минута</span>
+        <h2 id="test-h">На каком ты уровне?</h2>
+        <ul class="qlist" id="qlist">
+          <li><label><input type="checkbox" id="q1">Часто прокручиваю в голове прошлое или тревожусь о будущем</label></li>
+          <li><label><input type="checkbox" id="q2">Мне важно, что обо мне подумают</label></li>
+          <li><label><input type="checkbox" id="q3">Я спасаю других, а на себя времени нет</label></li>
+          <li><label><input type="checkbox" id="q4">Одни и те же истории повторяются: в деньгах, в отношениях, в конфликтах</label></li>
+          <li><label><input type="checkbox" id="q5">Умею быть только сильным, слабость не показываю</label></li>
+          <li><label><input type="checkbox" id="q6">Бывает, решаю из обиды или злости, а потом жалею</label></li>
+          <li><label><input type="checkbox" id="q7">Не помню, когда последний раз уделял время себе</label></li>
+        </ul>
+      </div>
+      <div class="result" aria-live="polite">
+        <span class="eyebrow">Твой результат</span>
+        <div>
+          <div class="meter"><i id="dot" style="left:0%"></i></div>
+          <div class="meter-l"><span>3D</span><span>переход</span><span>2D</span></div>
+        </div>
+        <div class="big" id="rTitle">—</div>
+        <p id="rText">Отметь то, что про тебя. Честно, это увидишь только ты.</p>
+        <div class="row">
+          <a class="btn solid" href="#apply" id="rCta">Разобрать со мной</a>
+          <button class="btn" type="button" id="reset">Сбросить</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="camp" aria-labelledby="camp-h">
+    <div class="camp">
+      <div class="photo reveal"><img src="img/camp.jpg" alt="Евгений на сцене бизнес-кэмпа перед залом" loading="lazy"></div>
+      <div class="camp-text">
+        <span class="eyebrow">Бизнес-кэмп · Подмосковье</span>
+        <h2 id="camp-h">Всё, что сегодня происходит в моей жизни, — благодаря людям</h2>
+        <p class="lead">Три дня, сто предпринимателей, спикеры, групповая работа и вечеринка без алкоголя. Кэмп я боялся делать много лет, а потом решил.</p>
+        <div class="camp-stats">
+          <div><b data-count="100">100</b><span>человек приехали и прилетели</span></div>
+          <div><b data-count="17">17</b><span>из них пошли в менторство</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="programs" aria-labelledby="prog-h">
+    <div class="sec-head">
+      <span class="eyebrow">Программы</span>
+      <h2 id="prog-h">Четыре ступени перехода</h2>
+      <p class="lead">Можно начать с истории и дойти до трёх месяцев работы рядом со мной. Каждая ступень — законченный шаг.</p>
+    </div>
+
+    <div class="ladder">
+      <div class="step reveal">
+        <span class="no">1</span>
+        <div><span class="kind">Бесплатно · онлайн</span><h3>Сериал «Жить во время»</h3><p>Моя история по сезонам и разговоры о деньгах, отношениях и свободе. Выпуски в Instagram и закрытом Telegram-канале.</p></div>
+        <ul class="meta"><li>Сезон 1 — «Выброс», 0–31</li><li>Сезон 2 — «Воспоминания»</li><li>Эфиры с вопросами</li></ul>
+        <a class="btn sm go" href="https://www.instagram.com/evgeniy_makhinya/" target="_blank" rel="noopener">Смотреть</a>
+      </div>
+      <div class="step reveal">
+        <span class="no">2</span>
+        <div><span class="kind">5 дней · онлайн</span><h3>Интенсив «Из 2D в 3D»</h3><p>Находим свой зацикленный кадр, раскладываем треугольник, в котором живёшь, и принимаешь одно решение «будет так» с планом на 30 дней.</p></div>
+        <ul class="meta"><li>Ежедневное задание и разбор</li><li>Чат потока</li><li>Финальный эфир со мной</li></ul>
+        <a class="btn sm go" href="#apply" data-prog="Интенсив «Из 2D в 3D»">Хочу</a>
+      </div>
+      <div class="step reveal">
+        <span class="no">3</span>
+        <div><span class="kind">3 дня · Подмосковье · сентябрь</span><h3>Бизнес-кэмп</h3><p>100+ предпринимателей, спикеры, практики на связи и эмоциональный интеллект. Здесь люди находят окружение, которое заряжает.</p></div>
+        <ul class="meta"><li>Контентная часть и спикеры</li><li>Групповая работа</li><li>Нетворкинг, который продолжается после</li></ul>
+        <a class="btn sm go" href="#apply" data-prog="Бизнес-кэмп">В лист ожидания</a>
+      </div>
+      <div class="step flag reveal">
+        <span class="no">4</span>
+        <div><span class="kind">3 месяца · офлайн + онлайн</span><h3>Менторство «Уровень 3D» <span class="pill">16 мест</span></h3><p>Работаем по четырём аспектам: бизнес, эмоции, тело, дух. Раз в месяц три дня вместе офлайн, между встречами — задачи и поддержка группы.</p></div>
+        <ul class="meta"><li>3 выезда по 3 дня</li><li>Личные разборы бизнеса</li><li>Группа до 16 человек</li></ul>
+        <a class="btn solid sm go" href="#apply" data-prog="Менторство «Уровень 3D»">Подать заявку</a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="eps-h">
+    <div class="eps">
+      <div class="photo reveal"><img src="img/podcast.jpg" alt="Евгений в студии подкаста" loading="lazy"></div>
+      <div style="display:grid;gap:var(--s3);min-width:0">
+        <div class="sec-head" style="margin:0">
+          <span class="eyebrow">Разговоры · reels и подкасты</span>
+          <h2 id="eps-h">О чём говорим</h2>
+        </div>
+        <ol class="ep-list">
+          <li>Мальчика встречают по одёжке, мужчину — по делам</li>
+          <li>Отношение определяет отношения</li>
+          <li>Деньги с неба всегда уходят</li>
+          <li>Есть цель — будут ресурсы</li>
+          <li>Решил не значит сделал</li>
+          <li>Богатство — это не про деньги</li>
+          <li>Я отдал за товарища 7,5 миллиона</li>
+          <li>Почему жизнь не меняется</li>
+        </ol>
+        <a class="btn" href="https://www.instagram.com/evgeniy_makhinya/reels/" target="_blank" rel="noopener" style="justify-self:start">Все выпуски в Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="who-h">
+    <div class="sec-head">
+      <span class="eyebrow">Для кого</span>
+      <h2 id="who-h">Узнаёшь себя?</h2>
+    </div>
+    <div class="who">
+      <article class="reveal" style="--c:var(--b-blue)"><h3>Предприниматель, который упёрся в потолок</h3><p>Доход есть, а ощущение «чего-то не хватает» не уходит. Вы крутитесь в одном и том же кадре и не видите, что мир проще.</p></article>
+      <article class="reveal" style="--c:var(--b-red)"><h3>Мужчина, который умеет быть только сильным</h3><p>Агрессия, контроль, одиночество в большом офисе. Много людей пошли учиться за мной, особенно мужчины.</p></article>
+      <article class="reveal" style="--c:var(--b-yellow)"><h3>Мама подростка</h3><p>Сыну 15, улица, тусовки, и вы не знаете, как до него достучаться. Я был этим подростком.</p><span class="soon">скоро отдельный поток</span></article>
+    </div>
+  </section>
+
+  <section aria-labelledby="voice-h">
+    <div class="sec-head">
+      <span class="eyebrow">Своими словами</span>
+      <h2 id="voice-h">Мысли, которыми живу</h2>
+    </div>
+    <div class="voice">
+      <blockquote class="reveal">«Бриллиант гранят под давлением. Без давления это просто камень.»<cite>Выброс · 24 года</cite></blockquote>
+      <blockquote class="reveal">«Не надо пытаться менять других людей. Меняйся сам, и всё вокруг изменится.»<cite>Выброс · 31 год</cite></blockquote>
+      <blockquote class="reveal">«Есть ли время проживать жизнь или только время для переживания жизни?»<cite>Выброс · третий день</cite></blockquote>
+    </div>
+  </section>
+
+  <section id="apply" aria-labelledby="apply-h">
+    <div class="apply">
+      <div style="display:grid;gap:var(--s2);align-content:start;min-width:0">
+        <span class="eyebrow">Заявка</span>
+        <h2 id="apply-h">Напиши, с чем идёшь</h2>
+        <p class="lead">Заполни форму. Мы соберём из неё сообщение, ты отправишь его мне в Direct, и команда ответит в течение дня.</p>
+        <div class="photo"><img src="img/walk.jpg" alt="Евгений Махиня" loading="lazy"></div>
+      </div>
+
+      <form id="form" novalidate>
+        <div class="field"><label for="f-name">Как тебя зовут</label><input type="text" id="f-name" autocomplete="given-name" placeholder="Евгений"></div>
+        <div class="field"><label for="f-prog">Что интересно</label>
+          <select id="f-prog">
+            <option>Менторство «Уровень 3D»</option>
+            <option>Бизнес-кэмп</option>
+            <option>Интенсив «Из 2D в 3D»</option>
+            <option>Поток для мам подростков</option>
+            <option>Пока не знаю, хочу поговорить</option>
+          </select>
+        </div>
+        <div class="field"><label for="f-biz">Чем занимаешься</label><input type="text" id="f-biz" placeholder="Например: своя студия, 12 сотрудников"></div>
+        <div class="field"><label for="f-why">Что хочешь изменить</label><textarea id="f-why" placeholder="Одно-два предложения, честно"></textarea></div>
+        <p class="err" id="err" hidden>Напиши имя и что хочешь изменить, так мне будет проще ответить.</p>
+        <button class="btn solid" type="submit">Собрать сообщение</button>
+
+        <div class="out" id="out" hidden>
+          <span class="eyebrow">Твоё сообщение</span>
+          <pre id="msg"></pre>
+          <div class="row">
+            <button class="btn solid sm" type="button" id="copy">Скопировать</button>
+            <a class="btn sm" href="https://ig.me/m/evgeniy_makhinya" target="_blank" rel="noopener">Открыть Direct</a>
+          </div>
+          <p class="hint" id="copyNote">Скопируй текст и вставь его в Direct @evgeniy_makhinya.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span><b>Евгений Махиня</b> · Жить во время</span>
+  <span>10% дохода проекта идёт на благотворительность</span>
+  <a href="https://www.instagram.com/evgeniy_makhinya/" target="_blank" rel="noopener">Instagram @evgeniy_makhinya</a>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  /* ---------- тест ---------- */
+  const boxes=[...document.querySelectorAll('#qlist input')];
+  const dot=document.getElementById('dot'), t=document.getElementById('rTitle'), p=document.getElementById('rText'), cta=document.getElementById('rCta');
+  const R=[
+    {max:0,title:'—',text:'Отметь то, что про тебя. Честно, это увидишь только ты.',cta:'Разобрать со мной'},
+    {max:2,title:'3D',text:'Ты в основном живёшь во время. Следующий шаг — окружение, которое тянет вверх. Посмотри бизнес-кэмп.',cta:'Хочу на кэмп',prog:'Бизнес-кэмп'},
+    {max:4,title:'Переход',text:'Ты уже видишь свои сценарии, но они ещё управляют. Это самый важный момент: принять одно решение «будет так».',cta:'Начать с интенсива',prog:'Интенсив «Из 2D в 3D»'},
+    {max:7,title:'2D',text:'Ты живёшь в зацикленном кадре. Я был там с 27 до 29 лет. Из него выходят, если рядом есть тот, кто прошёл.',cta:'Подать заявку в менторство',prog:'Менторство «Уровень 3D»'}
+  ];
+  function upd(){
+    const n=boxes.filter(b=>b.checked).length, r=R.find(x=>n<=x.max);
+    dot.style.left=(n/7*100)+'%'; t.textContent=r.title; p.textContent=r.text; cta.textContent=r.cta; cta.dataset.prog=r.prog||'';
+  }
+  boxes.forEach(b=>b.addEventListener('change',upd));
+  document.getElementById('reset').addEventListener('click',()=>{boxes.forEach(b=>b.checked=false);upd()});
+  upd();
+
+  /* ---------- заявка ---------- */
+  const sel=document.getElementById('f-prog');
+  document.querySelectorAll('[data-prog]').forEach(a=>a.addEventListener('click',()=>{
+    const v=a.dataset.prog; if(!v) return; [...sel.options].forEach(o=>{ if(o.text===v) sel.value=o.value; });
+  }));
+  const form=document.getElementById('form'), out=document.getElementById('out'), msg=document.getElementById('msg'), err=document.getElementById('err');
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const name=document.getElementById('f-name').value.trim(), why=document.getElementById('f-why').value.trim(), biz=document.getElementById('f-biz').value.trim();
+    if(!name||!why){err.hidden=false;out.hidden=true;return}
+    err.hidden=true;
+    const score=boxes.filter(b=>b.checked).length;
+    msg.textContent='Женя, привет! Меня зовут '+name+'.\n'+(biz?'Чем занимаюсь: '+biz+'.\n':'')+'Интересует: '+sel.value+'.\nХочу изменить: '+why+(score?'\nПо тесту у меня '+score+' из 7 (уровень '+(score<=2?'3D':score<=4?'переход':'2D')+').':'');
+    out.hidden=false;
+  });
+  document.getElementById('copy').addEventListener('click',()=>{
+    const note=document.getElementById('copyNote');
+    const pick=()=>{const r=document.createRange();r.selectNodeContents(msg);const s=getSelection();s.removeAllRanges();s.addRange(r);note.textContent='Текст выделен, скопируй его вручную.';};
+    try{navigator.clipboard.writeText(msg.textContent).then(()=>{note.textContent='Скопировано. Вставь в Direct.'},pick)}catch(e){pick()}
+  });
+
+  /* ---------- история: смена фото без анимационной библиотеки ---------- */
+  const reel=document.getElementById('reel'), ageBig=document.getElementById('ageBig'), cap=document.getElementById('cap');
+  const imgs=[...reel.querySelectorAll('img')];
+  function setScene(li){
+    const k=li.dataset.k; imgs.forEach(i=>i.classList.toggle('on',i.dataset.k===k));
+    cap.textContent=li.dataset.cap||''; animateNum(ageBig,+li.dataset.age);
+  }
+  let cur=0;
+  function animateNum(el,to){
+    const from=cur; cur=to; const t0=performance.now(), d=500;
+    const step=(now)=>{const k=Math.min(1,(now-t0)/d); el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-k,3))); if(k<1) requestAnimationFrame(step)};
+    requestAnimationFrame(step);
+  }
+  const items=[...document.querySelectorAll('#tl li[data-k]')];
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>{es.forEach(e=>{ if(e.isIntersecting) setScene(e.target) })},{rootMargin:'-45% 0px -50% 0px'});
+    items.forEach(li=>io.observe(li));
+  }
+
+  /* ---------- 3D-карточка следует за курсором ---------- */
+  const d3=document.getElementById('d3');
+  d3.addEventListener('pointermove',e=>{const r=d3.getBoundingClientRect(); d3.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%'); d3.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%')});
+
+  /* ---------- анимация GSAP ---------- */
+  if(!window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+  const mm=gsap.matchMedia();
+  mm.add('(prefers-reduced-motion: no-preference)',()=>{
+    // прогресс чтения
+    gsap.to('.progress',{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:.3}});
+
+    // интро: мазки, фото, заголовок, пометки от руки
+    const paths=[...document.querySelectorAll('.scribble path')];
+    paths.forEach(pth=>{const L=pth.getTotalLength(); pth.style.strokeDasharray=L; pth.style.strokeDashoffset=L;});
+    const tl=gsap.timeline({defaults:{ease:'power3.out'}});
+    tl.from('.band',{scaleX:0,transformOrigin:'left center',duration:1.1,stagger:.1,ease:'expo.out'})
+      .from('.hero-photo',{clipPath:'inset(100% 0% 0% 0% round 12px)',duration:1.1,ease:'power4.inOut'},'-=.95')
+      .from('.hero-photo img',{scale:1.25,duration:1.6,ease:'power2.out'},'<')
+      .from('.h1 .line > span',{yPercent:110,duration:.9,stagger:.1},'-=1.1')
+      .from('.hero .eyebrow, .hero .sub, .hero .lead, .hero .cta',{y:24,opacity:0,stagger:.08,duration:.7},'-=.6')
+      .to(paths,{strokeDashoffset:0,duration:.6,stagger:.25,ease:'power1.inOut'},'-=.3')
+      .from('.note',{opacity:0,y:10,rotate:0,stagger:.2,duration:.5},'-=.5');
+
+    // параллакс мазков и фото при скролле
+    gsap.to('.bands',{yPercent:14,rotate:-4,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+    gsap.to('.hero-photo',{yPercent:-6,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+
+    // счётчики
+    document.querySelectorAll('[data-count]').forEach(el=>{
+      const end=+el.dataset.count, o={v:0};
+      gsap.to(o,{v:end,duration:1.8,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 90%',once:true},onUpdate:()=>{el.textContent=Math.round(o.v)}});
+    });
+
+    // линия таймлайна заполняется по скроллу
+    gsap.to('#tlFill',{scaleY:1,ease:'none',scrollTrigger:{trigger:'#tl',start:'top 60%',end:'bottom 60%',scrub:true}});
+    gsap.utils.toArray('#tl li[data-k]').forEach(li=>{
+      gsap.from(li,{opacity:.25,x:24,duration:.6,scrollTrigger:{trigger:li,start:'top 80%',toggleActions:'play none none reverse'}});
+    });
+
+    // картина: параллакс
+    gsap.fromTo('#painting img',{yPercent:-8,scale:1.05},{yPercent:8,scale:1,ease:'none',scrollTrigger:{trigger:'#painting',start:'top bottom',end:'bottom top',scrub:true}});
+
+    // 2D → 3D: карточка «встаёт» в объём
+    gsap.fromTo('.lvl.d2',{rotateX:0},{rotateX:18,y:10,opacity:.8,ease:'none',scrollTrigger:{trigger:'.levels',start:'top 85%',end:'center 45%',scrub:true}});
+    gsap.fromTo('.lvl.d3',{rotateY:0,rotateX:0,z:0},{rotateY:-10,rotateX:6,z:60,ease:'none',scrollTrigger:{trigger:'.levels',start:'top 85%',end:'center 45%',scrub:true}});
+
+    // появление блоков
+    gsap.utils.toArray('.reveal').forEach(el=>{
+      gsap.from(el,{y:50,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+    });
+    gsap.utils.toArray('.photo.reveal img, .asp .photo img').forEach(im=>{
+      gsap.fromTo(im,{scale:1.15},{scale:1,ease:'none',scrollTrigger:{trigger:im,start:'top bottom',end:'bottom top',scrub:true}});
+    });
+
+    // ступени программ: цифра заливается цветом
+    gsap.utils.toArray('.step').forEach(s=>{
+      const no=s.querySelector('.no');
+      gsap.fromTo(no,{scale:.6,rotate:-12},{scale:1,rotate:0,duration:.8,ease:'back.out(2)',scrollTrigger:{trigger:s,start:'top 85%'}});
+    });
+
+    // заголовки секций: мягкий подъём
+    gsap.utils.toArray('section h2').forEach(h=>{
+      if(h.closest('.hero')) return;
+      gsap.from(h,{y:30,opacity:0,duration:.8,ease:'power3.out',scrollTrigger:{trigger:h,start:'top 90%'}});
+    });
+  });
+})();
+</script>
+</body>
+</html>
